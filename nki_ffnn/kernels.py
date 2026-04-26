@@ -167,7 +167,24 @@ def nki_predict(
     predictions = nl.ndarray((BATCH_SIZE,), dtype=np.int32, buffer=nl.hbm)
 
     # YOUR CODE HERE
-    max8_prob = nisa.max8(src=probs)
-    
+    t = nl.tile_size.pmax
+    t_rows = math.ceil(BATCH_SIZE / t)
+
+    for i in nl.affine_range(t_rows):
+        r = i * t
+
+        row_off, col_off = nl.mgrid[0:t, 0:OUTPUT_SIZE]
+
+        probs_tile = nl.load(
+            probs[r + row_off, col_off],
+            mask=(r + row_off) < BATCH_SIZE
+        )
+        max8_probs = nisa.max8(src=probs_tile)
+        max8_indices = nisa.nc_find_index8(data=probs_tile, vals=max8_probs)
+
+        nl.store(
+            predictions[r:r+t],
+            max8_indices[:, 0],
+        )
 
     return predictions
