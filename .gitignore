@@ -4,3 +4,5 @@
 *.neff
 *.ntff
 *.txt
+
+.venv
