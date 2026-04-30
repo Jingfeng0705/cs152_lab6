@@ -66,6 +66,10 @@ def conv2d_nki(X, W, bias):
                     # 1. Load the weight tile for the current input and output channel tiles idx and filter position
                     # 2. Store it in the w array at the correct location and orientation
                     # YOUR CODE HERE
+                    w[:, :, c_out_tile_idx, c_in_tile_idx, i, j] = nl.load_transpose2d(
+                        W[c_out_tile_idx*c_out_tile:(c_out_tile_idx+1)*c_out_tile, 
+                          c_in_tile_idx*c_in_tile:(c_in_tile_idx+1)*c_in_tile, i, j]
+                    )
 
     # Process the images one-by-one
     for img in nl.affine_range(batch_size):
@@ -75,6 +79,11 @@ def conv2d_nki(X, W, bias):
             for out_row in nl.affine_range(out_height):
                 # Assign PSUM buffer to accumulate output row
                 # YOUR CODE HERE
+                psum_row = nl.zeros(
+                    shape=(c_out_tile, out_width),
+                    dtype=nl.float32,
+                    buffer=nl.psum
+                )
 
                 # Loop over the input channel tiles and filter positions, accumulating the output row
                 for c_in_tile_idx in nl.affine_range(n_tiles_c_in):
@@ -84,11 +93,24 @@ def conv2d_nki(X, W, bias):
                             # 2. Load the input tile for the current input channel tile idx, output row, filter position
                             # 3. Matmul the weight tile and input tile, and accumulate the result in row_out
                             # YOUR CODE HERE
+                            w_tile = w[:, :, c_out_tile_idx, c_in_tile_idx, i, j]
+                            x_tile = nl.load(
+                                X[img, c_in_tile_idx*c_in_tile:(c_in_tile_idx+1)*c_in_tile, 
+                                  out_row+i, j:j+out_width],
+                            )
+                            psum_row += nisa.nc_matmul(w_tile, x_tile)
 
                 # Load and add the bias to the row_out based on the current output channel tile idx
                 # YOUR CODE HERE
+                b_tile = nl.load(bias[c_out_tile_idx * c_out_tile + nl.arange(c_out_tile)])
+                b_tile = nl.expand_dims(b_tile, axis=1)
+                out_tile = nl.add(b_tile, psum_row)
 
                 # Store the output  
                 # YOUR CODE HERE
+                nl.store(
+                    X_out[img, c_out_tile_idx*c_out_tile:(c_out_tile_idx+1)*c_out_tile, out_row, :],
+                    out_tile
+                )
 
     return X_out
