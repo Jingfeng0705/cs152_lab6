@@ -1,0 +1,68 @@
+{
+    "in128_out128_filter3x3_batch16_66x66_float16": {
+        "gen_data": 0.08514809608459473,
+        "exec_time": 12.131463527679443,
+        "met_threshold": true,
+        "benchmark_time": 1121
+    },
+    "in128_out128_filter5x5_batch16_36x36_float16": {
+        "gen_data": 0.027251005172729492,
+        "exec_time": 18.316757440567017,
+        "met_threshold": true,
+        "benchmark_time": 1483
+    },
+    "in128_out256_filter3x3_batch4_34x34_float32": {
+        "gen_data": 0.005708932876586914,
+        "exec_time": 9.187346458435059,
+        "met_threshold": true,
+        "benchmark_time": 504
+    },
+    "in128_out256_filter3x3_batch4_66x66_float16": {
+        "gen_data": 0.0222625732421875,
+        "exec_time": 10.05406403541565,
+        "met_threshold": true,
+        "benchmark_time": 557
+    },
+    "in128_out256_filter3x3_batch16_34x34_float32": {
+        "gen_data": 0.01707291603088379,
+        "exec_time": 13.224858283996582,
+        "met_threshold": true,
+        "benchmark_time": 1840
+    },
+    "in128_out256_filter5x5_batch4_36x36_float32": {
+        "gen_data": 0.009616851806640625,
+        "exec_time": 16.45987367630005,
+        "met_threshold": false,
+        "benchmark_time": 2162
+    },
+    "in128_out256_filter5x5_batch16_36x36_float16": {
+        "gen_data": 0.03078627586364746,
+        "exec_time": 29.22577476501465,
+        "met_threshold": true,
+        "benchmark_time": 2899
+    },
+    "in256_out256_filter3x3_batch4_34x34_float32": {
+        "gen_data": 0.011299610137939453,
+        "exec_time": 10.049043416976929,
+        "met_threshold": true,
+        "benchmark_time": 989
+    },
+    "in256_out256_filter3x3_batch16_34x34_float16": {
+        "gen_data": 0.046979427337646484,
+        "exec_time": 17.064478397369385,
+        "met_threshold": true,
+        "benchmark_time": 2145
+    },
+    "in256_out256_filter5x5_batch4_36x36_float16": {
+        "gen_data": 0.026349306106567383,
+        "exec_time": 20.29662823677063,
+        "met_threshold": true,
+        "benchmark_time": 2169
+    },
+    "in256_out256_filter5x5_batch16_36x36_float16": {
+        "gen_data": 0.06089925765991211,
+        "exec_time": 58.73557686805725,
+        "met_threshold": true,
+        "benchmark_time": 7901
+    }
+}

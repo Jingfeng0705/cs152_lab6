@@ -75,6 +75,7 @@ def conv2d_nki(X, W, bias):
     for img in nl.affine_range(batch_size):
         # Process each output channel tile
         for c_out_tile_idx in nl.affine_range(n_tiles_c_out):
+            b_tile = nl.load(bias[c_out_tile_idx*c_out_tile:(c_out_tile_idx+1)*c_out_tile])
             # Convolve: for each output row, convolve over the input channel tiles and filter positions
             for out_row in nl.affine_range(out_height):
                 # Assign PSUM buffer to accumulate output row
@@ -102,14 +103,12 @@ def conv2d_nki(X, W, bias):
 
                 # Load and add the bias to the row_out based on the current output channel tile idx
                 # YOUR CODE HERE
-                b_tile = nl.load(bias[c_out_tile_idx * c_out_tile + nl.arange(c_out_tile)])
-                b_tile = nl.expand_dims(b_tile, axis=1)
                 out_tile = nl.add(b_tile, psum_row)
 
                 # Store the output  
                 # YOUR CODE HERE
                 nl.store(
-                    X_out[img, c_out_tile_idx*c_out_tile:(c_out_tile_idx+1)*c_out_tile, out_row, :],
+                    X_out[img, c_out_tile_idx*c_out_tile:(c_out_tile_idx+1)*c_out_tile, out_row],
                     out_tile
                 )
 

@@ -1,0 +1,68 @@
+{
+    "in128_out128_filter3x3_batch16_66x66_float16": {
+        "gen_data": 0.09000945091247559,
+        "exec_time": 12.469598054885864,
+        "ref_exec_time": 10.65199613571167,
+        "correct": true
+    },
+    "in128_out128_filter5x5_batch16_36x36_float16": {
+        "gen_data": 0.027556419372558594,
+        "exec_time": 17.106576442718506,
+        "ref_exec_time": 5.717538833618164,
+        "correct": true
+    },
+    "in128_out256_filter3x3_batch4_34x34_float32": {
+        "gen_data": 0.005461454391479492,
+        "exec_time": 10.42432451248169,
+        "ref_exec_time": 0.00950932502746582,
+        "correct": true
+    },
+    "in128_out256_filter3x3_batch4_66x66_float16": {
+        "gen_data": 0.022237539291381836,
+        "exec_time": 11.197314739227295,
+        "ref_exec_time": 4.722627639770508,
+        "correct": true
+    },
+    "in128_out256_filter3x3_batch16_34x34_float32": {
+        "gen_data": 0.016709566116333008,
+        "exec_time": 11.324871301651001,
+        "ref_exec_time": 0.015904664993286133,
+        "correct": true
+    },
+    "in128_out256_filter5x5_batch4_36x36_float32": {
+        "gen_data": 0.009181976318359375,
+        "exec_time": 13.813125610351562,
+        "ref_exec_time": 0.021127939224243164,
+        "correct": true
+    },
+    "in128_out256_filter5x5_batch16_36x36_float16": {
+        "gen_data": 0.03029036521911621,
+        "exec_time": 28.627005100250244,
+        "ref_exec_time": 11.52344298362732,
+        "correct": true
+    },
+    "in256_out256_filter3x3_batch4_34x34_float32": {
+        "gen_data": 0.011058330535888672,
+        "exec_time": 10.79149866104126,
+        "ref_exec_time": 0.014954328536987305,
+        "correct": true
+    },
+    "in256_out256_filter3x3_batch16_34x34_float16": {
+        "gen_data": 0.04708528518676758,
+        "exec_time": 16.0129714012146,
+        "ref_exec_time": 8.333474397659302,
+        "correct": true
+    },
+    "in256_out256_filter5x5_batch4_36x36_float16": {
+        "gen_data": 0.02872490882873535,
+        "exec_time": 17.2404363155365,
+        "ref_exec_time": 6.057979583740234,
+        "correct": true
+    },
+    "in256_out256_filter5x5_batch16_36x36_float16": {
+        "gen_data": 0.06597185134887695,
+        "exec_time": 56.02781271934509,
+        "ref_exec_time": 23.70199155807495,
+        "correct": true
+    }
+}
